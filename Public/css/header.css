@@ -1,0 +1,88 @@
+:root {
+    --grass-center: #43a047;
+    --grass-edge: #1b5e20;
+    --white-pure: #f8fafc;
+    --accent-gold: #ffd700;
+}
+
+/* @font-face {
+    font-family: 'Cornella';
+    src: url('../Font/cornella-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+.desktop-header {
+    display: none; /* Oculto por defecto en celulares */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 30px;
+    box-sizing: border-box;
+    z-index: 1000;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Para Safari/iOS */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.desktop-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--white-pure);
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.desktop-header .logo img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.desktop-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.desktop-nav a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.desktop-nav a:hover {
+    color: var(--accent-gold);
+    background: rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+
+@media (min-width: 1024px) {
+    .desktop-header {
+        display: flex; 
+    }
+
+    .sticky-nav {
+        display: none !important;
+    }
+
+    .gallery-container, .main-wrapper, .trivia-container {
+        padding-top: 120px !important; 
+    }
+}

@@ -1,0 +1,276 @@
+/* ==========================================
+   VARIABLES Y FUENTES (TEMA UNIFICADO)
+   ========================================== */
+:root {
+    --grass-dark: #1b5e20;
+    --grass-light: #43a047;
+    --board-bg: #1b5e20;
+    --chalk-white: #f8fafc;
+    --red-card: #ef4444;
+    --accent-gold: #ffd700;
+    --text-dark: #1a1a1a; 
+}
+
+@font-face {
+    font-family: 'Cornella';
+    src: url('../Font/cornella-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, var(--grass-light) 0%);
+    color: var(--chalk-white);
+    margin: 0;
+    min-height: 100vh;
+}
+
+.media-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px 100px 20px;
+}
+
+/* TÍTULO */
+.page-title {
+    font-family: 'Cornella', sans-serif;
+    color: var(--chalk-white); 
+    text-align: center;
+    font-size: 4rem; /* Más grande en PC */
+    margin-bottom: 5px;
+    margin-top: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* --- SELECTOR DE PAÍSES --- */
+.country-selector {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    justify-content: center;
+}
+
+/* Scrollbar personalizada */
+.country-selector::-webkit-scrollbar { height: 8px; }
+.country-selector::-webkit-scrollbar-track { 
+    background: rgba(0,0,0,0.2); 
+    border-radius: 4px; 
+}
+.country-selector::-webkit-scrollbar-thumb { 
+    background: var(--accent-gold); 
+    border-radius: 4px; 
+}
+
+.flag-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 3px solid transparent;
+    border-radius: 50%;
+    width: 80px; /* Un poco más grande en PC */
+    height: 80px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transición activada */
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.flag-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.3s ease; /* Transición activada */
+}
+
+.flag-btn:hover, .flag-btn.active {
+    transform: scale(1.1) translateY(-5px); /* Transición activada */
+    border-color: var(--accent-gold);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.4);
+}
+
+.flag-btn.active img, .flag-btn:hover img { opacity: 1; }
+
+/* --- GRID MULTIMEDIA --- */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 80px 20px;
+    border: 3px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* --- TARJETA DE MEDIA --- */
+.media-card {
+    background: var(--chalk-white); 
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s; /* Transición activada */
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.media-card:hover {
+    transform: translateY(-8px); /* Transición activada */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.media-preview {
+    width: 100%;
+    height: 250px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.media-preview img, 
+.media-preview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.media-desc {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.media-desc h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--grass-dark); 
+}
+
+.media-desc p {
+    margin: 0;
+    font-size: 1rem;
+    color: #475569; 
+    line-height: 1.5;
+}
+
+/* --- BARRA DE FILTROS --- */
+.filter-toolbar {
+    padding: 15px;
+    background: var(--grass-dark); 
+    border-top: 4px solid var(--accent-gold); 
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.filter-title {
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+    display: block;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--chalk-white);
+    font-size: 0.8rem;
+    padding: 8px 15px;
+    border-radius: 20px; 
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.filter-btn.active {
+    background: var(--accent-gold);
+    color: var(--grass-dark);
+    border-color: var(--accent-gold);
+    font-weight: 800;
+}
+
+/* --- FILTROS CSS --- */
+.fx-blur { filter: blur(4px); }
+.fx-pixel { filter: url(#pixelate); }
+.fx-thermal { filter: url(#thermal) contrast(150%); }
+.fx-pastel { filter: brightness(1.1) contrast(0.9) saturate(0.6) sepia(0.1); }
+.fx-sat { filter: saturate(250%) contrast(110%); }
+.fx-adjust { filter: hue-rotate(45deg) contrast(120%); }
+
+/* ========================================= */
+/* DISEÑO RESPONSIVO                         */
+/* ========================================= */
+
+@media (max-width: 992px) {
+    .media-container {
+        padding: 80px 20px 100px 20px;
+    }
+    
+    .media-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title { 
+        font-size: 2.8rem; 
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .country-selector {
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+    
+    .flag-btn {
+        width: 70px;
+        height: 70px;
+    }
+
+    .media-grid {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        gap: 25px;
+    }
+    
+    .media-preview {
+        height: 200px; /* Reducimos la altura del video en móvil */
+    }
+}

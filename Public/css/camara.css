@@ -1,0 +1,396 @@
+/* @font-face {
+    font-family: 'Cornella';
+    src: url('../Font/cornella-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+/* --- CONTENEDOR GENERAL --- */
+#camera-container, #ar-scene-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 10;
+    overflow: hidden;
+}
+
+#webcam, video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2 !important;
+}
+
+.camera-ui {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* --- HEADER DE LA CÁMARA --- */
+.camera-header {
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.scan-status {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dot-blink {
+    width: 8px; 
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #ef4444;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink { 
+    50% { opacity: 0; } 
+}
+
+.btn-close-ar {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.btn-close-ar:hover {
+    background: rgba(255, 0, 0, 0.8);
+}
+
+/* --- BOTONES FLOTANTES (Ver Info / Bailar) --- */
+#found-btn-container {
+    position: absolute;
+    bottom: 120px;
+    left: 0; 
+    width: 100%;
+    text-align: center;
+    pointer-events: auto;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.found-btn-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+.found-btn-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#anim-controls {
+    bottom: 200px; /* Para que quede arriba del botón de info */
+}
+
+.btn-aesthetic, #view-info-btn {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+#view-info-btn {
+    background: var(--accent-gold, #FFD700);
+    color: var(--grass-dark, #1A4D2E);
+}
+
+#view-info-btn:hover {
+    transform: scale(1.05);
+}
+
+#detected-label {
+    color: white;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* --- FICHA DE INFO ENRIQUECIDA --- */
+.ar-card {
+    position: absolute;
+    bottom: -600px; /* Oculta por defecto */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px; /* Límite para pantallas grandes */
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: auto;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.4);
+    z-index: 100;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.ar-card.show { 
+    bottom: 30px; 
+}
+
+.close-card {
+    position: absolute; 
+    top: 15px; 
+    right: 20px;
+    background: #f1f5f9; 
+    border: none; 
+    font-size: 1.5rem; 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%;
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    color: #333;
+}
+
+.ar-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+.ar-card-header img {
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 3px solid var(--grass-dark, #1A4D2E);
+}
+
+.ar-card-header h2 {
+    margin: 0;
+    /* font-family: 'Cornella', sans-serif; */
+    color: var(--grass-dark, #1A4D2E);
+    font-size: 1.8rem;
+}
+
+/* Media (Video en la tarjeta) */
+#ar-video-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    background: #000;
+}
+
+#ar-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Contenido de la Tarjeta */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stat-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.stat-box strong {
+    color: var(--grass-dark, #1A4D2E);
+    font-size: 1rem;
+}
+
+.curious-fact {
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 4px solid var(--accent-gold, #FFD700);
+    padding: 12px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: #334155;
+    margin-bottom: 15px;
+}
+
+.curious-fact strong {
+    color: #b45309; 
+}
+
+.main-info {
+    font-size: 0.95rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.btn-details {
+    display: inline-block;
+    background: var(--grass-dark, #1A4D2E);
+    color: var(--accent-gold, #FFD700);
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn-details:hover {
+    transform: scale(1.05);
+}
+
+
+/* ========================================= */
+/* DISEÑO RESPONSIVO (MEDIA QUERIES)         */
+/* ========================================= */
+
+/* Para Tablets y Pantallas Medianas */
+@media (min-width: 768px) {
+    .camera-header {
+        top: 30px;
+        left: 40px;
+        right: 40px;
+    }
+
+    #found-btn-container {
+        bottom: 140px;
+    }
+
+    #anim-controls {
+        bottom: 220px;
+    }
+
+    .btn-aesthetic, #view-info-btn {
+        padding: 15px 35px;
+        font-size: 1.2rem;
+    }
+
+    .ar-card {
+        padding: 30px;
+    }
+
+    #ar-video-container {
+        height: 250px;
+    }
+
+    .ar-card-header h2 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Para PC y Pantallas Grandes */
+@media (min-width: 1024px) {
+    /* Mueve la tarjeta al lado derecho en lugar de abajo para no tapar la cámara */
+    .ar-card {
+        bottom: 50%;
+        left: auto;
+        right: -600px; /* Oculta a la derecha */
+        transform: translateY(50%);
+        width: 400px;
+        max-height: 90vh;
+        transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .ar-card.show { 
+        bottom: 50%; /* Mantiene el centrado vertical */
+        right: 40px; /* Muestra desde la derecha */
+    }
+
+    #found-btn-container {
+        bottom: 80px;
+    }
+
+    #anim-controls {
+        bottom: 160px;
+    }
+}
+
+/* Ajustes para celulares muy pequeños */
+@media (max-width: 380px) {
+    .camera-header {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .scan-status {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .btn-aesthetic, #view-info-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    .ar-card-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .ar-card {
+        padding: 15px;
+        width: 95%;
+    }
+
+    #ar-video-container {
+        height: 150px;
+    }
+}

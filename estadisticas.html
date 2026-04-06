@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Equipos</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Public/css/navbar.css">
+
+    <link rel="stylesheet" href="Public/css/header.css">
+
+    <link rel="stylesheet" href="Public/css/estadisticas.css">
+
+    <link rel="stylesheet" href="Public/css/modal_estadistica.css">
+
+</head>
+<body>
+
+    <header class="desktop-header">
+        <div class="logo">
+    <img src="Public/Imagenes/Goool.png" alt="Logo ARCO">
+    <span>ARCO</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="index.html"> Inicio</a>
+            <a href="videos.html"> Galería</a>
+            <a href="trivia.html">Trivia</a>
+            <!-- <a href="#">Estadística</a> -->
+            <!-- <a href="#">Prueba</a> -->
+        </nav>
+    </header>
+
+    <div class="gallery-container">
+        
+        <h1 class="page-title">Equipos</h1>
+
+<div class="team-grid">
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/fr.png" alt="Bandera Francia">
+                </div>
+                <div class="card-info">
+                    <h2>Francia</h2>
+                    <p class="team-desc">Les Bleus</p>
+                    <button class="btn-saber-mas" onclick="openModal('francia')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/es.png" alt="Bandera España">
+                </div>
+                <div class="card-info">
+                    <h2>España</h2>
+                    <p class="team-desc">La Furia Roja</p>
+                    <button class="btn-saber-mas" onclick="openModal('espana')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/de.png" alt="Bandera Alemania">
+                </div>
+                <div class="card-info">
+                    <h2>Alemania</h2>
+                    <p class="team-desc">Die Mannschaft</p>
+                    <button class="btn-saber-mas" onclick="openModal('alemania')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/br.png" alt="Bandera Brasil">
+                </div>
+                <div class="card-info">
+                    <h2>Brasil</h2>
+                    <p class="team-desc">La Canarinha</p>
+                    <button class="btn-saber-mas" onclick="openModal('brasil')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/ar.png" alt="Bandera Argentina">
+                </div>
+                <div class="card-info">
+                    <h2>Argentina</h2>
+                    <p class="team-desc">La Albiceleste</p>
+                    <button class="btn-saber-mas" onclick="openModal('argentina')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/mx.png" alt="Bandera México">
+                </div>
+                <div class="card-info">
+                    <h2>México</h2>
+                    <p class="team-desc">El Tricolor</p>
+                    <button class="btn-saber-mas" onclick="openModal('mexico')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/ma.png" alt="Bandera Marruecos">
+                </div>
+                <div class="card-info">
+                    <h2>Marruecos</h2>
+                    <p class="team-desc">Leones del Atlas</p>
+                    <button class="btn-saber-mas" onclick="openModal('marruecos')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/uy.png" alt="Bandera Uruguay">
+                </div>
+                <div class="card-info">
+                    <h2>Uruguay</h2>
+                    <p class="team-desc">La Celeste</p>
+                    <button class="btn-saber-mas" onclick="openModal('uruguay')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/gb-eng.png" alt="Bandera Inglaterra">
+                </div>
+                <div class="card-info">
+                    <h2>Inglaterra</h2>
+                    <p class="team-desc">The Three Lions</p>
+                    <button class="btn-saber-mas" onclick="openModal('inglaterra')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-flag">
+                    <img src="https://flagcdn.com/w320/kr.png" alt="Bandera Corea del Sur">
+                </div>
+                <div class="card-info">
+                    <h2>Corea del Sur</h2>
+                    <p class="team-desc">Tigres de Asia</p>
+                    <button class="btn-saber-mas" onclick="openModal('corea')">Saber más <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    
+    <div id="teamModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <div class="modal-header">
+                <img id="modalFlag" src="" alt="Bandera" class="modal-flag-img">
+                <h2 id="modalTitle">País</h2>
+            </div>
+            
+            <div class="modal-body">
+                
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <h4>Ranking FIFA</h4>
+                        <p id="modalRanking">#0</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>Estrella</h4>
+                        <p id="modalPlayer">Nombre</p>
+                    </div>
+                </div>
+                
+                <div class="tactical-board">
+                    <ul id="modalStatsList">
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="sticky-nav">
+        <a href="index.html" id="nav-inicio"><i class="fa-regular fa-images"></i>Galería</a>
+        <a href="#" id="nav-publicaciones"><i class="fa-solid fa-question"></i>Trivia</a>
+        <a href="#" id="nav-datos-curiosos"><i class="fa-solid fa-chart-line"></i>Estadística</a>
+        <a href="#">Prueba</a>
+    </nav>
+
+    <script src="Public/js/estadisticas.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+:root {
+    --brand-primary: #78A649;
+    --brand-accent: #598b40;
+    --brand-emphasis: #f8fafc;
+    --grass-edge: #1b5e20;
+    --accent-gold: #ffd700;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* @font-face {
+    font-family: 'Cornella';
+    src: url('../Font/cornella-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+.sticky-nav {
+    position: fixed;
+    bottom: 25px; 
+    left: 50%;
+    transform: translateX(-50%); /* Truco infalible para centrar barras flotantes */
+    width: 90%; /* Un poco más ancha para que los íconos respiren */
+    max-width: 400px; /* Límite para que no se estire demasiado en tablets */
+    height: 65px;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Para iOS */
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease; /* Activada */
+}
+
+.sticky-nav a {
+    text-decoration: none;
+    color: #94a3b8; /* Gris un poco más oscuro para que resalte en fondos claros */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: all 0.3s ease; /* Activada */
+    padding: 5px;
+}
+
+.sticky-nav a i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Activada: Efecto rebote */
+}
+
+.sticky-nav a:hover,
+.sticky-nav a.active {
+    color: var(--grass-edge);
+}
+
+.sticky-nav a:hover i,
+.sticky-nav a.active i {
+    transform: translateY(-5px) scale(1.1); /* El ícono salta hacia arriba */
+    color: var(--accent-gold);
+    filter: drop-shadow(0 4px 6px rgba(255, 215, 0, 0.4));
+}
+
+/* ========================================= */
+/* DISEÑO RESPONSIVO                         */
+/* ========================================= */
+
+/* En PC/Escritorio la barra inferior desaparece porque ya está el Header superior */
+@media (min-width: 1024px) {
+    .sticky-nav {
+        display: none !important;
+    }
+}
+
+/* Ajustes para celulares súper pequeños (iPhone SE) */
+@media (max-width: 350px) {
+    .sticky-nav {
+        width: 95%;
+        height: 60px;
+        bottom: 15px;
+    }
+    
+    .sticky-nav a {
+        font-size: 0.65rem;
+    }
+    
+    .sticky-nav a i {
+        font-size: 1.2rem;
+    }
+}

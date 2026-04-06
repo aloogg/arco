@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia de Fútbol</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Segoe+UI:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Public/css/navbar.css">
+    <link rel="stylesheet" href="Public/css/header.css">
+    <link rel="stylesheet" href="Public/css/trivia.css">
+</head>
+<body>
+
+    <header class="desktop-header">
+        <div class="logo">
+            <img src="Public/Imagenes/Goool.png" alt="Logo ARCO">
+            <span>ARCO</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="index.html">Inicio</a>
+            <a href="videos.html">Galería</a>
+            <a href="estadisticas.html">Estadística</a>
+        </nav>
+    </header>
+
+    <div class="game-wrapper">
+        
+        <div class="category-selector">
+            <button class="cat-btn active" data-category="mundiales"><i class="fa-solid fa-earth-americas"></i> Mundiales</button>
+            <button class="cat-btn" data-category="jugadores"><i class="fa-solid fa-user-astronaut"></i> Jugadores</button>
+            <button class="cat-btn" data-category="equipos"><i class="fa-solid fa-shield-halved"></i> Equipos</button>
+        </div>
+
+        <div class="scoreboard">
+            <div class="score-box">
+                <span class="label">GOLES</span>
+                <span id="scoreCounter" class="number">0</span>
+            </div>
+
+            <div class="lives-box">
+                <span class="label">TARJETAS</span>
+                <div class="cards-container">
+                    <div id="card1" class="red-card empty"></div>
+                    <div id="card2" class="red-card empty"></div>
+                    <div id="card3" class="red-card empty"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tactical-board-container">
+            <div class="board-header">
+                <span class="tactic-pin">📍</span>
+                <h2 id="questionText">¿Pregunta?</h2>
+            </div>
+            
+            <div class="options-grid" id="optionsContainer">
+                </div>
+        </div>
+
+    </div>
+
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">¡EXPULSADO!</h2>
+            <p id="modalMessage">Acumulaste 3 tarjetas rojas.</p>
+            <div class="modal-score">
+                Puntuación Final: <span id="finalScore">0</span> Goles
+            </div>
+            <button class="restart-btn" onclick="restartGame()">Jugar de Nuevo 🔄</button>
+        </div>
+    </div>
+
+    <nav class="sticky-nav">
+        <a href="index.html"><i class="fa-solid fa-house"></i>Inicio</a>
+        <a href="videos.html"><i class="fa-regular fa-images"></i>Galería</a>
+        <a href="trivia.html" style="color: var(--accent-gold);"><i class="fa-solid fa-question"></i>Trivia</a>
+        <a href="estadisticas.html"><i class="fa-solid fa-chart-line"></i>Stats</a>
+    </nav>
+
+    <script src="Public/js/trivia.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+:root {
+    --grass-center: #43a047;
+    --grass-edge: #1b5e20;
+    --white-pure: #f8fafc;
+    --accent-gold: #ffd700;
+}
+
+/* @font-face {
+    font-family: 'Cornella';
+    src: url('../Font/cornella-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: radial-gradient(circle at center, var(--grass-center) 0%);
+}
+
+.ra-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 60vh;
+    width: 100%;
+}
+
+.ra-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.ra-button {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background-color: var(--white-pure);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border: 5px solid rgba(255,255,255,0.3);
+    background-clip: padding-box;
+    
+    transition: all 0.3s ease;
+}
+
+.ra-button::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    z-index: -1;
+    animation: ripple 2s infinite cubic-bezier(0, 0.2, 0.8, 1);
+}
+
+.ra-button:active {
+    transform: scale(0.92);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.ra-text {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--grass-edge);
+    letter-spacing: -1px;
+    user-select: none;
+}
+
+.p {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.p1 { width: 8px; height: 8px; animation: orbit 6s infinite linear; }
+.p2 { width: 12px; height: 12px; animation: orbit 9s infinite linear reverse; }
+.p3 { width: 6px; height: 6px; animation: orbit 7s infinite linear -2s; }
+.p4 { width: 10px; height: 10px; animation: orbit 11s infinite linear -5s; }
+.p5 { width: 8px; height: 8px; animation: orbit 8s infinite linear -1s; }
+.p6 { width: 5px; height: 5px; animation: orbit 13s infinite linear reverse -3s; }
+.p7 { width: 14px; height: 14px; animation: orbit 10s infinite linear -4s; }
+.p8 { width: 7px; height: 7px; animation: orbit 12s infinite linear reverse -6s; }
+
+
+/* --- ANIMACIONES --- */
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+        border-width: 4px;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+        border-width: 0px;
+    }
+}
+
+@keyframes orbit {
+    0% { transform: rotate(0deg) translateX(110px) rotate(0deg) scale(0.5); opacity: 0.3; }
+    50% { opacity: 0.8; transform: rotate(180deg) translateX(110px) rotate(-180deg) scale(1); }
+    100% { transform: rotate(360deg) translateX(110px) rotate(-360deg) scale(0.5); opacity: 0.3; }
+}
+
+/* ======================================================== */
+/* --- DISEÑO RESPONSIVO (Agregado sin alterar lo anterior) --- */
+/* ======================================================== */
+
+/* 📱 CELULARES MUY PEQUEÑOS */
+@media (max-width: 380px) {
+    .ra-wrapper::before {
+        width: 260px;
+        height: 260px;
+    }
+    .ra-button {
+        width: 110px;
+        height: 110px;
+    }
+    .ra-text {
+        font-size: 2.2rem;
+    }
+    
+    /* Reasignamos la animación para que no se salga de la pantalla */
+    .p1 { animation: orbit-mobile 6s infinite linear; }
+    .p2 { animation: orbit-mobile 9s infinite linear reverse; }
+    .p3 { animation: orbit-mobile 7s infinite linear -2s; }
+    .p4 { animation: orbit-mobile 11s infinite linear -5s; }
+    .p5 { animation: orbit-mobile 8s infinite linear -1s; }
+    .p6 { animation: orbit-mobile 13s infinite linear reverse -3s; }
+    .p7 { animation: orbit-mobile 10s infinite linear -4s; }
+    .p8 { animation: orbit-mobile 12s infinite linear reverse -6s; }
+}
+
+@keyframes orbit-mobile {
+    0% { transform: rotate(0deg) translateX(85px) rotate(0deg) scale(0.5); opacity: 0.3; }
+    50% { opacity: 0.8; transform: rotate(180deg) translateX(85px) rotate(-180deg) scale(1); }
+    100% { transform: rotate(360deg) translateX(85px) rotate(-360deg) scale(0.5); opacity: 0.3; }
+}
+
+/* 💻 PC Y MONITORES GRANDES */
+@media (min-width: 1024px) {
+    .ra-wrapper::before {
+        width: 450px;
+        height: 450px;
+    }
+    .ra-button {
+        width: 180px;
+        height: 180px;
+    }
+    .ra-text {
+        font-size: 3.5rem;
+    }
+
+    /* Reasignamos la animación para que aproveche el espacio en PC */
+    .p1 { animation: orbit-pc 6s infinite linear; }
+    .p2 { animation: orbit-pc 9s infinite linear reverse; }
+    .p3 { animation: orbit-pc 7s infinite linear -2s; }
+    .p4 { animation: orbit-pc 11s infinite linear -5s; }
+    .p5 { animation: orbit-pc 8s infinite linear -1s; }
+    .p6 { animation: orbit-pc 13s infinite linear reverse -3s; }
+    .p7 { animation: orbit-pc 10s infinite linear -4s; }
+    .p8 { animation: orbit-pc 12s infinite linear reverse -6s; }
+}
+
+@keyframes orbit-pc {
+    0% { transform: rotate(0deg) translateX(160px) rotate(0deg) scale(0.5); opacity: 0.3; }
+    50% { opacity: 0.8; transform: rotate(180deg) translateX(160px) rotate(-180deg) scale(1); }
+    100% { transform: rotate(360deg) translateX(160px) rotate(-360deg) scale(0.5); opacity: 0.3; }
+}

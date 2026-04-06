@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCO - Realidad Aumentada</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Segoe+UI:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="Public/css/navbar.css">
+    <link rel="stylesheet" href="Public/css/header.css">
+    <link rel="stylesheet" href="Public/css/inicio.css">
+    <link rel="stylesheet" href="Public/css/camara.css">
+
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+
+    <header class="desktop-header">
+        <div class="logo">
+            <img src="Public/Imagenes/Goool.png" alt="Logo ARCO">
+            <span>ARCO</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="videos.html"> Galería</a>
+            <a href="trivia.html"> Trivia</a>
+            <a href="estadisticas.html"> Estadística</a>
+            <a href="manual_usuario.pdf" target="_blank" style="color: var(--accent-gold);"><i class="fa-solid fa-book"></i> Manual de Usuario</a>
+        </nav>
+    </header>
+
+    <div class="ra-wrapper">
+        <div class="ra-button" id="start-ra-btn">
+            <span class="ra-text">RA</span>
+            <span class="p p1"></span><span class="p p2"></span><span class="p p3"></span>
+            <span class="p p4"></span><span class="p p5"></span><span class="p p6"></span>
+            <span class="p p7"></span><span class="p p8"></span>
+        </div>
+    </div>
+
+    <div id="ar-scene-container" style="display: none; position: relative; z-index: 10;">
+        <a-scene mindar-image="imageTargetSrc: Public/targets.mind; uiScanning: no; uiLoading: no; filterMinCF:0.0001; filterBeta: 0.001;" 
+                 color-space="sRGB" 
+                 renderer="colorManagement: true, physicallyCorrectLights" 
+                 vr-mode-ui="enabled: false" 
+                 device-orientation-permission-ui="enabled: false">
+
+            <a-light type="ambient" intensity="1"></a-light>
+            <a-light type="directional" position="1 1 1" intensity="1"></a-light>
+
+            <a-assets>
+                <a-asset-item id="player-src" src="Public/Modelos/corea/idle.glb"></a-asset-item>
+                <a-asset-item id="player-dance-src" src="Public/Modelos/corea/dance.glb"></a-asset-item>
+            </a-assets>
+
+            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+            <a-entity mindar-image-target="targetIndex: 0" data-country="francia">
+                <a-gltf-model id="francia-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="francia-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+
+            <a-entity mindar-image-target="targetIndex: 1" data-country="espana">
+                <a-gltf-model id="espana-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="espana-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+
+            <a-entity mindar-image-target="targetIndex: 2" data-country="alemania">
+                <a-gltf-model id="alemania-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="alemania-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>                
+            </a-entity> 
+            
+            <a-entity mindar-image-target="targetIndex: 3" data-country="brasil">
+                <a-gltf-model id="brasil-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="brasil-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+            
+             <a-entity mindar-image-target="targetIndex: 4" data-country="argentina">
+                <a-gltf-model id="argentina-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="argentina-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+
+            <a-entity mindar-image-target="targetIndex: 5" data-country="mexico">
+                <a-gltf-model id="mexico-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="mexico-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+
+            <a-entity mindar-image-target="targetIndex: 6" data-country="marruecos">
+                <a-gltf-model id="marruecos-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="marruecos-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+
+            <a-entity mindar-image-target="targetIndex: 7" data-country="uruguay">
+                <a-gltf-model id="uruguay-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="uruguay-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+
+            <a-entity mindar-image-target="targetIndex: 8" data-country="inglaterra">
+                <a-gltf-model id="inglaterra-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="inglaterra-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+            </a-entity>
+            
+            <a-entity mindar-image-target="targetIndex: 9" data-country="corea">
+                <a-gltf-model id="corea-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="corea-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
+
+            </a-entity> 
+
+        </a-scene>
+
+        <div class="camera-ui">
+            <div class="camera-header">
+                <div class="scan-status">
+                    <span class="dot-blink"></span> Escaneando...
+                </div>
+                <button id="close-camera" class="btn-close-ar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="scanner-frame"></div>
+
+            <div id="found-btn-container" class="found-btn-hidden">
+                <button id="view-info-btn" class="btn-aesthetic">
+                    <i class="fa-regular fa-eye"></i> Ver Información
+                </button>
+                <p id="detected-label">¡País Detectado!</p>
+            </div>
+
+            <div id="anim-controls" style="display: none; position: absolute; bottom: 180px; width: 100%; text-align: center; pointer-events: auto;">
+                <button id="toggle-anim-btn" class="btn-aesthetic" style="background: var(--grass-light); color: white; display: inline-flex; justify-content: center; margin: 0 auto;">
+                    <i class="fa-solid fa-person-walking"></i> <span>¡Bailar!</span>
+                </button>
+            </div>
+
+            <div id="ar-info-card" class="ar-card">
+                <button class="close-card" onclick="closeArCard()">&times;</button>
+                
+                <div class="ar-card-header">
+                    <img id="ar-flag" src="" alt="Bandera">
+                    <h2 id="ar-country-name">País</h2>
+                </div>
+
+                <div class="ar-card-content">
+                    <div id="ar-video-container" style="display: none;">
+                        <video id="ar-video" autoplay loop muted playsinline></video>
+                    </div>
+                    <div id="ar-extra-info"></div>
+                    <a href="videos.html" class="btn-details" style="margin-top: 15px; display: block; text-align: center;">Ir a Galería Completa</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="sticky-nav">
+        <a href="videos.html"><i class="fa-regular fa-images"></i>Galería</a>
+        <a href="trivia.html"><i class="fa-solid fa-question"></i>Trivia</a>
+        <a href="estadisticas.html"><i class="fa-solid fa-chart-line"></i>Stats</a>
+        <a href="Public/manual_usuario.pdf" target="_blank"><i class="fa-solid fa-book"></i>Manual</a>
+    </nav>
+
+    <script src="Public/js/camara.js"></script>
+
+</body>
+</html>
