@@ -122,31 +122,30 @@ let isDancing = false;
 // =========================================
 startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
-    sceneContainer.style.visibility = 'visible'; // Mostrar escena
     
-    // Le damos una micro-pausa de 100ms. 
-    // Engaña al bloqueo del celular y le da tiempo al lienzo 3D de crecer.
-    setTimeout(() => {
-        const scene = document.querySelector('a-scene');
-        
-        // Forzamos a A-Frame a recalcular el tamaño de la pantalla
-        window.dispatchEvent(new Event('resize'));
-        if(scene.resize) scene.resize();
-
-        const arSystem = scene.systems['mindar-image-system'];
-        
+    const scene = document.querySelector('a-scene');
+    const arSystem = scene.systems['mindar-image-system'];
+    
+    // Función segura para encender la cámara
+    const startAR = () => {
         if (arSystem) {
-            // PARCHE ANTI-CRASH UI
+            // Parche para evitar errores si falta la UI de MindAR
             if (!arSystem.ui) {
-                arSystem.ui = {
-                    showLoading: () => {}, hideLoading: () => {}, showCompatibility: () => {}, showScanning: () => {}, hideScanning: () => {}
-                };
+                arSystem.ui = { showLoading: () => {}, hideLoading: () => {}, showCompatibility: () => {}, showScanning: () => {}, hideScanning: () => {} };
             }
-            
-            // ¡Prendemos la cámara con seguridad!
+            // Ahora sí, arrancar de forma segura
             arSystem.start();
         }
-    }, 100);
+    };
+
+    // La magia: Verificar si la cámara de A-Frame ya existe
+    if (scene.hasLoaded) {
+        // Si ya cargó en segundo plano, la encendemos directo
+        startAR();
+    } else {
+        // Si el celular es lento, esperamos el evento 'loaded' para encenderla
+        scene.addEventListener('loaded', startAR);
+    }
 });
 
 // =========================================
