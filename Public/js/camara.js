@@ -120,27 +120,36 @@ let isDancing = false;
 // =========================================
 // INICIAR AR
 // =========================================
+// =========================================
+// INICIAR AR
+// =========================================
 startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
     sceneContainer.style.display = 'block'; // Mostrar escena
     
-    // Forzamos a la pantalla a recalcularse
-    window.dispatchEvent(new Event('resize'));
-
-    const scene = document.querySelector('a-scene');
-    const arSystem = scene.systems['mindar-image-system'];
-    
-    if (arSystem) {
-        // PARCHE ANTI-CRASH UI
-        if (!arSystem.ui) {
-            arSystem.ui = {
-                showLoading: () => {}, hideLoading: () => {}, showCompatibility: () => {}, showScanning: () => {}, hideScanning: () => {}
-            };
-        }
+    // Le damos una micro-pausa de 100ms. 
+    // Engaña al bloqueo del celular y le da tiempo al lienzo 3D de crecer.
+    setTimeout(() => {
+        const scene = document.querySelector('a-scene');
         
-        // ¡PRENDEMOS LA CÁMARA DE FORMA INMEDIATA! (Sin setTimeout)
-        arSystem.start();
-    }
+        // Forzamos a A-Frame a recalcular el tamaño de la pantalla
+        window.dispatchEvent(new Event('resize'));
+        if(scene.resize) scene.resize();
+
+        const arSystem = scene.systems['mindar-image-system'];
+        
+        if (arSystem) {
+            // PARCHE ANTI-CRASH UI
+            if (!arSystem.ui) {
+                arSystem.ui = {
+                    showLoading: () => {}, hideLoading: () => {}, showCompatibility: () => {}, showScanning: () => {}, hideScanning: () => {}
+                };
+            }
+            
+            // ¡Prendemos la cámara con seguridad!
+            arSystem.start();
+        }
+    }, 100);
 });
 
 // =========================================
