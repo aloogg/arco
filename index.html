@@ -42,22 +42,20 @@
     </div>
 
     <div id="ar-scene-container" style="display: none; position: relative; z-index: 10;">
-
         
-        <a-scene mindar-image="imageTargetSrc: Public/targets.mind; autoStart: false; uiScanning: no; uiLoading: no; filterMinCF:0.0001; filterBeta: 0.001;" 
-         color-space="sRGB" 
-         renderer="colorManagement: true, physicallyCorrectLights" 
-         vr-mode-ui="enabled: false" 
-         device-orientation-permission-ui="enabled: false">
-
-         
+            
+        <a-scene mindar-image="imageTargetSrc: ./public/targets.mind; autoStart: false; uiScanning: no; filterMinCF:0.0001; filterBeta: 0.001;" 
+             color-space="sRGB" 
+            renderer="colorManagement: true, physicallyCorrectLights" 
+            vr-mode-ui="enabled: false" 
+            device-orientation-permission-ui="enabled: false">
 
             <a-light type="ambient" intensity="1"></a-light>
             <a-light type="directional" position="1 1 1" intensity="1"></a-light>
 
             <a-assets>
-                <a-asset-item id="player-src" src="Public/Modelos/corea/idle.glb"></a-asset-item>
-                <a-asset-item id="player-dance-src" src="Public/Modelos/corea/dance.glb"></a-asset-item>
+                <a-asset-item id="player-src" src="./Public/Modelos/corea/idle.glb"></a-asset-item>
+                <a-asset-item id="player-dance-src" src="./Public/Modelos/corea/dance.glb"></a-asset-item>
             </a-assets>
 
             <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
