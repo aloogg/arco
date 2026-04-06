@@ -127,13 +127,27 @@ startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
     sceneContainer.style.display = 'block'; // Mostrar escena
     
-    // Forzamos la actualización de la pantalla de inmediato
+    // Forzamos a la pantalla a recalcularse
     window.dispatchEvent(new Event('resize'));
 
     setTimeout(() => {
         const scene = document.querySelector('a-scene');
-        if (scene.systems['mindar-image-system']) {
-            scene.systems['mindar-image-system'].start();
+        const arSystem = scene.systems['mindar-image-system'];
+        
+        if (arSystem) {
+            // PARCHE ANTI-CRASH: Creamos un objeto UI falso si MindAR olvidó hacerlo
+            if (!arSystem.ui) {
+                arSystem.ui = {
+                    showLoading: () => {},
+                    hideLoading: () => {},
+                    showCompatibility: () => {},
+                    showScanning: () => {},
+                    hideScanning: () => {}
+                };
+            }
+            
+            // Ahora sí, prendemos la cámara con seguridad
+            arSystem.start();
         }
     }, 500);
 });
