@@ -114,26 +114,21 @@ const brazilDance = document.getElementById('brazil-dance');
 
 // Variables de Estado
 let currentDetectedCountry = null;
-let currentCountryKey = null;
+let currentCountryKey = null; // Para saber qué país está activo
 let isDancing = false;
 
 // =========================================
-// INICIAR AR (CORREGIDO PARA MÓVILES)
+// INICIAR AR
 // =========================================
 startBtn.addEventListener('click', () => {
-    mainWrapper.style.display = 'none'; 
-    sceneContainer.style.display = 'block'; 
+    mainWrapper.style.display = 'none'; // Ocultar botón RA
+    sceneContainer.style.display = 'block'; // Mostrar escena
     
-    // El setTimeout le da tiempo al navegador a renderizar el div antes de encender la cámara
     setTimeout(() => {
-        // Disparamos un resize forzado para que el canvas de MindAR ocupe toda la pantalla
         window.dispatchEvent(new Event('resize'));
-        
         const scene = document.querySelector('a-scene');
-        if (scene && scene.systems['mindar-image-system']) {
+        if (scene.systems['mindar-image-system']) {
             scene.systems['mindar-image-system'].start();
-        } else {
-            console.error("Error: MindAR no está listo todavía.");
         }
     }, 500);
 });
@@ -142,14 +137,15 @@ startBtn.addEventListener('click', () => {
 // CERRAR AR
 // =========================================
 closeBtn.addEventListener('click', () => {
-    // Es la forma más segura de limpiar la cámara en móviles
     location.reload(); 
 });
 
 // =========================================
 // CAMBIAR TEXTURAS
 // =========================================
+
 function changeShirtTexture(modelEl, countryKey){
+
     const mesh = modelEl.getObject3D('mesh');
     if(!mesh) return;
 
@@ -163,11 +159,15 @@ function changeShirtTexture(modelEl, countryKey){
         if(node.isMesh){
             if(node.material.name === "Ch38_body"){
             node.material = node.material.clone();
+
             node.material.map = texture;
+
             node.material.needsUpdate = true;
             }
         }
     });
+
+
 }
 
 // =========================================
@@ -185,17 +185,20 @@ document.addEventListener("DOMContentLoaded", () => {
             
             console.log("Encontrado: " + countryData.name);
             
+            // UI General
             currentDetectedCountry = countryData;
-            currentCountryKey = countryKey; 
+            currentCountryKey = countryKey; // Guardamos la clave (ejemplo "mexico")
             
             detectedLabel.innerText = "¡" + countryData.name + " Detectado!";
             foundContainer.classList.remove('found-btn-hidden');
             foundContainer.classList.add('found-btn-visible');
 
-            animControls.style.display = 'block'; 
+            // LÓGICA 3D DINÁMICA
+            animControls.style.display = 'block'; // Mostrar botón de baile
             isDancing = false;
             toggleAnimBtn.innerHTML = '<i class="fa-solid fa-person-walking"></i> <span>¡Bailar!</span>';
             
+            // Buscar los modelos del país específico que acabas de escanear
             const idleModel = document.getElementById(`${countryKey}-idle`);
             const danceModel = document.getElementById(`${countryKey}-dance`);
 
@@ -220,15 +223,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             }
+            if(idleModel) idleModel.setAttribute('visible', 'true');
+            if(danceModel) danceModel.setAttribute('visible', 'false');
         });
 
-        // IMAGEN PERDIDA
+        // 2. EVENTO: IMAGEN PERDIDA
         target.addEventListener("targetLost", event => {
             console.log("Objetivo perdido");
             
             foundContainer.classList.remove('found-btn-visible');
             foundContainer.classList.add('found-btn-hidden');
-            animControls.style.display = 'none'; 
+            animControls.style.display = 'none'; // Ocultar botón de baile
         });
     });
 });
@@ -237,18 +242,21 @@ document.addEventListener("DOMContentLoaded", () => {
 // EVENTO: BOTÓN DE ANIMACIÓN (BAILAR/PARAR)
 // =========================================
 toggleAnimBtn.addEventListener('click', () => {
-    if (!currentCountryKey) return; 
+    if (!currentCountryKey) return; // Si no hay país, no hacer nada
 
-    isDancing = !isDancing; 
+    isDancing = !isDancing; // Invertir estado
 
+    // Buscar los modelos del país que está actualmente en pantalla
     const idleModel = document.getElementById(`${currentCountryKey}-idle`);
     const danceModel = document.getElementById(`${currentCountryKey}-dance`);
 
     if (isDancing) {
+        // Poner a bailar
         if(idleModel) idleModel.setAttribute('visible', 'false');
         if(danceModel) danceModel.setAttribute('visible', 'true');
         toggleAnimBtn.innerHTML = '<i class="fa-solid fa-person"></i> <span>Parar</span>';
     } else {
+        // Volver a idle
         if(idleModel) idleModel.setAttribute('visible', 'true');
         if(danceModel) danceModel.setAttribute('visible', 'false');
         toggleAnimBtn.innerHTML = '<i class="fa-solid fa-person-walking"></i> <span>¡Bailar!</span>';
@@ -261,6 +269,7 @@ toggleAnimBtn.addEventListener('click', () => {
 viewInfoBtn.addEventListener('click', () => {
     if (currentDetectedCountry) {
         
+        // Datos básicos
         document.getElementById('ar-flag').src = currentDetectedCountry.flag;
         document.getElementById('ar-country-name').innerText = currentDetectedCountry.name;
         
@@ -270,8 +279,9 @@ viewInfoBtn.addEventListener('click', () => {
         
         if (currentDetectedCountry.videoUrl) {
             arVideo.src = currentDetectedCountry.videoUrl;
-            arVideoContainer.style.display = 'block'; 
+            arVideoContainer.style.display = 'block'; // Mostrar video
             
+            // Llenar información extra con HTML
             extraInfo.innerHTML = `
                 <div class="stats-grid">
                     <div class="stat-box">
@@ -294,8 +304,10 @@ viewInfoBtn.addEventListener('click', () => {
             extraInfo.innerHTML = `<p class="main-info">${currentDetectedCountry.info}</p>`;
         }
         
+        // Mostrar ficha
         arCard.classList.add('show');
         
+        // Ocultar botón flotante para limpiar vista
         foundContainer.classList.remove('found-btn-visible');
         foundContainer.classList.add('found-btn-hidden');
     }
