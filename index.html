@@ -8,10 +8,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Segoe+UI:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="Public/css/navbar.css">
-    <link rel="stylesheet" href="Public/css/header.css">
-    <link rel="stylesheet" href="Public/css/inicio.css">
-    <link rel="stylesheet" href="Public/css/camara.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/inicio.css">
+    <link rel="stylesheet" href="assets/css/camara.css">
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
@@ -21,7 +21,7 @@
 
     <header class="desktop-header">
         <div class="logo">
-            <img src="Public/Imagenes/Goool.png" alt="Logo ARCO">
+            <img src="assets/Imagenes/Goool.png" alt="Logo ARCO">
             <span>ARCO</span>
         </div>
         <nav class="desktop-nav">
@@ -42,7 +42,7 @@
     </div>
 
     <div id="ar-scene-container" style="display: none; position: relative; z-index: 10;">
-<a-scene mindar-image="imageTargetSrc: Public/targets.mind; autoStart: false; uiScanning: no; filterMinCF:0.0001; filterBeta: 0.001;" 
+<a-scene mindar-image="imageTargetSrc: assets/targets.mind; autoStart: false; uiScanning: no; filterMinCF:0.0001; filterBeta: 0.001;" 
                  color-space="sRGB" 
                  renderer="colorManagement: true, physicallyCorrectLights" 
                  vr-mode-ui="enabled: false" 
@@ -52,8 +52,8 @@
             <a-light type="directional" position="1 1 1" intensity="1"></a-light>
 
             <a-assets timeout="30000">
-                <a-asset-item id="player-src" src="Public/Modelos/corea/idle.glb"></a-asset-item>
-                <a-asset-item id="player-dance-src" src="Public/Modelos/corea/dance.glb"></a-asset-item>
+                <a-asset-item id="player-src" src="assets/Modelos/corea/idle.glb"></a-asset-item>
+                <a-asset-item id="player-dance-src" src="assets/Modelos/corea/dance.glb"></a-asset-item>
             </a-assets>
 
             <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -157,10 +157,10 @@
         <a href="videos.html"><i class="fa-regular fa-images"></i>Galería</a>
         <a href="trivia.html"><i class="fa-solid fa-question"></i>Trivia</a>
         <a href="estadisticas.html"><i class="fa-solid fa-chart-line"></i>Stats</a>
-        <a href="Public/manual_usuario.pdf" target="_blank"><i class="fa-solid fa-book"></i>Manual</a>
+        <a href="manual_usuario.pdf" target="_blank"><i class="fa-solid fa-book"></i>Manual</a>
     </nav>
 
-    <script src="Public/js/camara.js"></script>
+    <script src="assets/js/camara.js"></script>
 
 </body>
 </html>
