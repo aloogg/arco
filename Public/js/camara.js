@@ -120,12 +120,17 @@ let isDancing = false;
 // =========================================
 // INICIAR AR
 // =========================================
+// =========================================
+// INICIAR AR
+// =========================================
 startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
     sceneContainer.style.display = 'block'; // Mostrar escena
     
+    // Forzamos la actualización de la pantalla de inmediato
+    window.dispatchEvent(new Event('resize'));
+
     setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
         const scene = document.querySelector('a-scene');
         if (scene.systems['mindar-image-system']) {
             scene.systems['mindar-image-system'].start();
