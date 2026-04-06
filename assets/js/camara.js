@@ -158,7 +158,7 @@ function changeShirtTexture(modelEl, countryKey){
     if(!mesh) return;
 
     const loader = new THREE.TextureLoader();
-    const texture = loader.load(`assets/Modelos/${countryKey}/Shirt_diffuse.png`);
+    const texture = loader.load(`/assets/Modelos/${countryKey}/Shirt_diffuse.png`);
 
     texture.flipY = false;
     // texture.colorSpace = THREE.SRGBColorSpace;
