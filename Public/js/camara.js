@@ -120,17 +120,37 @@ let isDancing = false;
 // =========================================
 // INICIAR AR
 // =========================================
+// =========================================
+// INICIAR AR
+// =========================================
 startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
     sceneContainer.style.display = 'block'; // Mostrar escena
     
-    setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-        const scene = document.querySelector('a-scene');
-        if (scene.systems['mindar-image-system']) {
-            scene.systems['mindar-image-system'].start();
+    const scene = document.querySelector('a-scene');
+
+    // Forzar a la ventana a recalcular el tamaño del canvas
+    window.dispatchEvent(new Event('resize'));
+
+    // Función para arrancar MindAR de forma segura
+    const startMindAR = () => {
+        try {
+            if (scene.systems['mindar-image-system']) {
+                scene.systems['mindar-image-system'].start();
+            }
+        } catch (error) {
+            console.error("Error al iniciar MindAR:", error);
         }
-    }, 500);
+    };
+
+    // Si la escena ya cargó, lo iniciamos. Si no, esperamos a que cargue.
+    if (scene.hasLoaded) {
+        setTimeout(startMindAR, 100); // Pequeño respiro para el navegador
+    } else {
+        scene.addEventListener('loaded', () => {
+            setTimeout(startMindAR, 100);
+        });
+    }
 });
 
 // =========================================
