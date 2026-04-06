@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div id="ar-scene-container" style="display: none; position: relative; z-index: 10;">
+    <div id="ar-scene-container" style="visibility: hidden; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;">
 <a-scene mindar-image="imageTargetSrc: assets/targets.mind; autoStart: false; uiScanning: no; filterMinCF:0.0001; filterBeta: 0.001;" 
                  color-space="sRGB" 
                  renderer="colorManagement: true, physicallyCorrectLights" 
@@ -59,12 +59,12 @@
             <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
             <a-entity mindar-image-target="targetIndex: 0" data-country="francia">
-                <a-gltf-model id="francia-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                 <a-gltf-model id="francia-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
                 <a-gltf-model id="francia-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
             </a-entity>
 
             <a-entity mindar-image-target="targetIndex: 1" data-country="espana">
-                <a-gltf-model id="espana-idle" src="#player-src" position="0 0 0" scale="0.01 0.01 0.01" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="espana-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
                 <a-gltf-model id="espana-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
             </a-entity>
 
@@ -105,7 +105,7 @@
             -->
 
             <a-entity mindar-image-target="targetIndex: 9" data-country="corea">
-                <a-gltf-model id="corea-idle" src="#player-src" position="0 0 0" scale="0.01 0.01 0.01" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
+                <a-gltf-model id="corea-idle" src="#player-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="true"></a-gltf-model>
                 <a-gltf-model id="corea-dance" src="#player-dance-src" position="0 0 0" scale="0.5 0.5 0.5" rotation="90 0 0" animation-mixer visible="false"></a-gltf-model>
             </a-entity>  
 

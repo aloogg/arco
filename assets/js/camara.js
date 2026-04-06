@@ -120,12 +120,9 @@ let isDancing = false;
 // =========================================
 // INICIAR AR
 // =========================================
-// =========================================
-// INICIAR AR
-// =========================================
 startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
-    sceneContainer.style.display = 'block'; // Mostrar escena
+    sceneContainer.style.visibility = 'visible'; // Mostrar escena
     
     // Le damos una micro-pausa de 100ms. 
     // Engaña al bloqueo del celular y le da tiempo al lienzo 3D de crecer.
