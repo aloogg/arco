@@ -121,27 +121,16 @@ let isDancing = false;
 // INICIAR AR
 // =========================================
 startBtn.addEventListener('click', () => {
-    mainWrapper.style.display = 'none';
-    sceneContainer.style.display = 'block';
-
-    const scene = document.querySelector('a-scene');
-
-    const startAR = () => {
-        const mindarSystem = scene.systems["mindar-image-system"];
-        if (mindarSystem) {
-            mindarSystem.start();
-        } else {
-            console.error("MindAR no encontrado");
+    mainWrapper.style.display = 'none'; // Ocultar botón RA
+    sceneContainer.style.display = 'block'; // Mostrar escena
+    
+    setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+        const scene = document.querySelector('a-scene');
+        if (scene.systems['mindar-image-system']) {
+            scene.systems['mindar-image-system'].start();
         }
-    };
-
-    if (scene.hasLoaded) {
-        // 🔥 ya cargó → iniciar directo
-        startAR();
-    } else {
-        // 🔥 aún no → esperar
-        scene.addEventListener("loaded", startAR);
-    }
+    }, 500);
 });
 
 // =========================================
