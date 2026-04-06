@@ -118,19 +118,16 @@ let currentCountryKey = null; // Para saber qué país está activo
 let isDancing = false;
 
 // =========================================
-// INICIAR AR (Fijo para móvil)
+// INICIAR AR
 // =========================================
 startBtn.addEventListener('click', () => {
-    mainWrapper.style.display = 'none'; // Ocultar botón inicial
-    
-    // En lugar de display: block, lo hacemos visible
-    sceneContainer.style.visibility = 'visible';
-    sceneContainer.style.opacity = '1';
+    mainWrapper.style.display = 'none'; // Ocultar botón RA
+    sceneContainer.style.display = 'block'; // Mostrar escena
     
     setTimeout(() => {
         window.dispatchEvent(new Event('resize'));
         const scene = document.querySelector('a-scene');
-        if (scene && scene.systems['mindar-image-system']) {
+        if (scene.systems['mindar-image-system']) {
             scene.systems['mindar-image-system'].start();
         }
     }, 500);
