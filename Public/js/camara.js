@@ -172,7 +172,10 @@ function changeShirtTexture(modelEl, countryKey){
     const texture = loader.load(`Public/Modelos/${countryKey}/Shirt_diffuse.png`);
 
     texture.flipY = false;
-    texture.colorSpace = THREE.SRGBColorSpace;
+    // texture.colorSpace = THREE.SRGBColorSpace;
+
+    // Reemplazado
+    texture.encoding = THREE.sRGBEncoding;
 
     mesh.traverse((node)=>{
         if(node.isMesh){
