@@ -1,3 +1,10 @@
+/* @font-face {
+    font-family: 'Cornella';
+    src: url('../Font/cornella-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
 /* --- CONTENEDOR GENERAL --- */
 #camera-container, #ar-scene-container {
     position: fixed;
@@ -14,11 +21,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw !important; /* Forzamos el ancho de la ventana */
-    height: 100vh !important; /* Forzamos el alto de la ventana */
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     z-index: -2 !important;
-    background-color: #000; /* Fondo negro por si tarda en cargar la cámara */
 }
 
 .camera-ui {
@@ -116,7 +122,7 @@
 }
 
 #anim-controls {
-    bottom: 200px;
+    bottom: 200px; /* Para que quede arriba del botón de info */
 }
 
 .btn-aesthetic, #view-info-btn {
@@ -155,11 +161,11 @@
 /* --- FICHA DE INFO ENRIQUECIDA --- */
 .ar-card {
     position: absolute;
-    bottom: -600px;
+    bottom: -600px; /* Oculta por defecto */
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    max-width: 500px;
+    max-width: 500px; /* Límite para pantallas grandes */
     background: white;
     border-radius: 20px;
     padding: 20px;
@@ -211,6 +217,7 @@
 
 .ar-card-header h2 {
     margin: 0;
+    /* font-family: 'Cornella', sans-serif; */
     color: var(--grass-dark, #1A4D2E);
     font-size: 1.8rem;
 }
@@ -295,6 +302,7 @@
 /* DISEÑO RESPONSIVO (MEDIA QUERIES)         */
 /* ========================================= */
 
+/* Para Tablets y Pantallas Medianas */
 @media (min-width: 768px) {
     .camera-header {
         top: 30px;
@@ -328,11 +336,13 @@
     }
 }
 
+/* Para PC y Pantallas Grandes */
 @media (min-width: 1024px) {
+    /* Mueve la tarjeta al lado derecho en lugar de abajo para no tapar la cámara */
     .ar-card {
         bottom: 50%;
         left: auto;
-        right: -600px;
+        right: -600px; /* Oculta a la derecha */
         transform: translateY(50%);
         width: 400px;
         max-height: 90vh;
@@ -340,8 +350,8 @@
     }
 
     .ar-card.show { 
-        bottom: 50%;
-        right: 40px;
+        bottom: 50%; /* Mantiene el centrado vertical */
+        right: 40px; /* Muestra desde la derecha */
     }
 
     #found-btn-container {
@@ -353,6 +363,7 @@
     }
 }
 
+/* Ajustes para celulares muy pequeños */
 @media (max-width: 380px) {
     .camera-header {
         top: 10px;
