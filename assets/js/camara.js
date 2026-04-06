@@ -124,27 +124,20 @@ startBtn.addEventListener('click', () => {
     mainWrapper.style.display = 'none'; // Ocultar botón RA
     
     const scene = document.querySelector('a-scene');
+    
+    // Le pedimos el sistema AR a A-Frame
     const arSystem = scene.systems['mindar-image-system'];
     
-    // Función segura para encender la cámara
-    const startAR = () => {
-        if (arSystem) {
-            // Parche para evitar errores si falta la UI de MindAR
-            if (!arSystem.ui) {
-                arSystem.ui = { showLoading: () => {}, hideLoading: () => {}, showCompatibility: () => {}, showScanning: () => {}, hideScanning: () => {} };
-            }
-            // Ahora sí, arrancar de forma segura
-            arSystem.start();
+    if (arSystem) {
+        // Parche de seguridad para la UI
+        if (!arSystem.ui) {
+            arSystem.ui = { showLoading: () => {}, hideLoading: () => {}, showCompatibility: () => {}, showScanning: () => {}, hideScanning: () => {} };
         }
-    };
-
-    // La magia: Verificar si la cámara de A-Frame ya existe
-    if (scene.hasLoaded) {
-        // Si ya cargó en segundo plano, la encendemos directo
-        startAR();
+        
+        // ¡Encendemos la cámara INMEDIATAMENTE en el clic!
+        arSystem.start();
     } else {
-        // Si el celular es lento, esperamos el evento 'loaded' para encenderla
-        scene.addEventListener('loaded', startAR);
+        console.error("El sistema AR aún no está listo.");
     }
 });
 
